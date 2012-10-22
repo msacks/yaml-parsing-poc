@@ -20,24 +20,12 @@ def getInstanceMeta():
     instance = getInstanceId()
     stream = file('SALTCMDB.yml', 'r')
 
-    # Using yaml.load only returns the last document.
-    # This returns a generator type object instead of a dict, the Python docs
-    # don't really describe how to work with this
-    myDict = yaml.load(stream)
-    #changing this to load_all creates a generator object, something I'm not sure why
-    # or how to match my dict.
+    configDict = yaml.load(stream)
 
-# simpler printing
-#    if myDict.has_key('instanceId') == True:
-#        for key in myDict:
-#             print key, myDict[key] #just get this to print for now
-
-#debug printing:
-##bug key, value mappings for nested keys not working
-
-    if myDict.has_key('instance') == True:
-        for key in myDict:
-            print "key:" + key + " " + "value: " +  myDict[key] + "\n"
+    if configDict.has_key('instance') == True:
+        for key, value in configDict.iteritems():
+            print "key: ", key, "value: ", value
+    print "Environment: " + configDict['instance']['environment']
 
     #return myDict
 
