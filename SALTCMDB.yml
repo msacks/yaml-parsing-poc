@@ -11,12 +11,13 @@ instance:
      serverName: PHPSRV-X.example.com
      ipAddr: 10.1.1.10
      roles: [webserver,php]
-#
-#---
-#instanceId: i-bbbbbbb
-#     environment:X
-#     saltId:APPSRV-X
-#     awsHostname:ip-someip
-#     serverName:PHPSRV-X.example.com
-#     ipAddr:10.1.1.10
-#     roles:[webserver,php]
+
+---
+instance:
+     Id: i-bbbbbbb
+     environment: X
+     saltId: APPSRV-X
+     awsHostname: ip-someip
+     serverName: PHPSRV-X.example.com
+     ipAddr: 10.1.1.10
+     roles: [webserver,php]

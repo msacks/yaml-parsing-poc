@@ -19,15 +19,16 @@ def getInstanceId():
 def getInstanceMeta():
     instance = getInstanceId()
     stream = file('SALTCMDB.yml', 'r')
+    print "instance 1: ", instance
 
-    configDict = yaml.load(stream)
+#debugging
+    for configDict in yaml.load_all(stream):
+        if configDict['instance']['Id'] == instance:
+            print "instance 2: ", configDict['instance']['Id']
+            for key, value in configDict['instance']['Id'].iteritems():
+                print "key: ", key, "value: ", value
 
-    if configDict.has_key('instance') == True:
-        for key, value in configDict.iteritems():
-            print "key: ", key, "value: ", value
-    print "Environment: " + configDict['instance']['environment']
-
-    #return myDict
+    #return configDict
 
 
 def updateConfigFile():
