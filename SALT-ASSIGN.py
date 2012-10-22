@@ -25,7 +25,7 @@ def getInstanceMeta():
     myDict = yaml.load(stream)
 
     #the following does not work
-    if key in myDict.has_key('instanceId') == True:
+    if myDict.has_key('instanceId') == True:
         for key in myDict:
              print key, myDict[key] #just get this to print for now
 
