@@ -1,8 +1,9 @@
 #!/bin/python26
 
+import os, sys
 import yaml
 import pycurl
-import StringIO
+import StringIO, exceptions
 
 def getInstanceId():
     curlObj = pycurl.Curl()
@@ -24,14 +25,27 @@ def getInstanceMeta():
     # don't really describe how to work with this
     myDict = yaml.load(stream)
 
-    #the following does not work
+#    if myDict.has_key('instanceId') == True:
+#        for key in myDict:
+#             print key, myDict[key] #just get this to print for now
     if myDict.has_key('instanceId') == True:
         for key in myDict:
-             print key, myDict[key] #just get this to print for now
+            print "key:" + key + " " + "value: " +  myDict[key] + "\n"
+    #just get this to print for now
+    #bug key, value mappings for nested keys not working
 
+    #return myDict
+
+
+def updateConfigFile():
+    MINION_CONFIG_FILE = "/etc/salt/minion"
+    try:
+        os.path.isfile(MINION_CONFIG_FILE)
+    except IOError as e:
+        print "Cannot read minion config file"
 
 def main():
-    getInstanceMeta()
+    getInstanceMeta() #replace with updateConfigFile when search and replace function is complete
 
 if __name__ == "__main__":
     main()
