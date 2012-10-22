@@ -24,15 +24,20 @@ def getInstanceMeta():
     # This returns a generator type object instead of a dict, the Python docs
     # don't really describe how to work with this
     myDict = yaml.load(stream)
+    #changing this to load_all creates a generator object, something I'm not sure why
+    # or how to match my dict.
 
+# simpler printing
 #    if myDict.has_key('instanceId') == True:
 #        for key in myDict:
 #             print key, myDict[key] #just get this to print for now
+
+#debug printing:
+##bug key, value mappings for nested keys not working
+
     if myDict.has_key('instance') == True:
         for key in myDict:
             print "key:" + key + " " + "value: " +  myDict[key] + "\n"
-    #just get this to print for now
-    #bug key, value mappings for nested keys not working
 
     #return myDict
 
