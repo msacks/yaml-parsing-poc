@@ -1,0 +1,21 @@
+# MASTER SALT CONFIGURATION MANAGEMENT "DB"
+# @author msacks@.com
+# Created on 10/19/201
+# Updated:
+
+instanceId: i-aaaaaaaa
+     environment:X
+     saltId:APPSRV-X
+     awsHostname:ip-someip
+     serverName:PHPSRV-X.example.com
+     ipAddr:10.1.1.10
+     roles:[webserver,php]
+
+#---
+instanceId: i-bbbbbbb
+     environment:X
+     saltId:APPSRV-X
+     awsHostname:ip-someip
+     serverName:PHPSRV-X.example.com
+     ipAddr:10.1.1.10
+     roles:[webserver,php]
