@@ -17,7 +17,7 @@ def getInstanceId():
     return buffer.getvalue()
 
 def getInstanceMeta():
-    instanceId = getInstanceId()
+    instance = getInstanceId()
     stream = file('SALTCMDB.yml', 'r')
 
     # Using yaml.load only returns the last document.
@@ -28,7 +28,7 @@ def getInstanceMeta():
 #    if myDict.has_key('instanceId') == True:
 #        for key in myDict:
 #             print key, myDict[key] #just get this to print for now
-    if myDict.has_key('instanceId') == True:
+    if myDict.has_key('instance') == True:
         for key in myDict:
             print "key:" + key + " " + "value: " +  myDict[key] + "\n"
     #just get this to print for now
