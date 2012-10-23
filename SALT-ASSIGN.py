@@ -3,7 +3,11 @@
 import os, sys
 import yaml
 import pycurl
-import StringIO, exceptions
+import StringIO
+
+
+# TODO check if the minion config already exists, if so, delete it
+# TODO instead of doing a search and replace, dump yaml to conf.d
 
 def getInstanceId():
     curlObj = pycurl.Curl()
@@ -16,29 +20,42 @@ def getInstanceId():
     curlObj.perform()
     return buffer.getvalue()
 
-def getInstanceMeta():
+def writeSaltMinionConfig():
     instance = getInstanceId()
     stream = file('SALTCMDB.yml', 'r')
+    MINION_CONFIG_FILE = "minion"
+    TEST_CONFIG_FILE = open("testMinionConfig", "w")
 
-#debugging
+    #   MINION_CONFIG_FILE = "/etc/salt/minion" #production use
+
     for configDict in yaml.load_all(stream):
-        if configDict['instance']['Id'] == instance:
-#            print configDict['instance']['Id']
-            #debug output, just return the configDict for usage by updateConfig in production use
-            for key, value in configDict.iteritems():
-                print "key: ", key, "value: ", value
+        if configDict['instance']['id'] == instance:
+            #assign local variables
+#            saltId =
 
-    #return configDict
+            TEST_CONFIG_FILE.write("id: " + configDict['instance']['saltId'] + "\n")
+            yaml.dump(configDict['instance']['grains'], TEST_CONFIG_FILE)
 
-def updateConfigFile():
-    MINION_CONFIG_FILE = "/etc/salt/minion"
-    try:
-        os.path.isfile(MINION_CONFIG_FILE)
-    except IOError as e:
-        print "Cannot read minion config file"
+            TEST_CONFIG_FILE.close()
+
+            #debug:
+#            for key, value in configDict.iteritems():
+#                print "key: ", key, "value: ", value
+
+
+#def fixShit():
+##ugly hack to add tabs, I know yaml.dump will maintain the format, but its not for some reason
+#    with open("testMinionConfig", "w") as minionConfig:
+#        lines = minionConfig.readlines()
+#        for line in lines:
+#            try:
+#                minionConfig.write(re.sub(r'^environment', '\tenvironment', line))
+#            except ValueError:
+#                print "Could not parse regex"
 
 def main():
-    getInstanceMeta() #replace with updateConfigFile when search and replace function is complete
+    writeSaltMinionConfig()
+    fixShit()
 
 if __name__ == "__main__":
     main()
