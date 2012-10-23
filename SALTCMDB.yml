@@ -4,7 +4,7 @@
 # Updated:
 ---
 instance:
-     Id: i-aaaaaaaa
+     Id: i-1234567
      environment: X
      saltId: APPSRV-X
      awsHostname: ip-someip
